@@ -29,5 +29,9 @@ namespace MyLittlePetShop.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MyLittlePetShop.Models.ShoppingCategory> ShoppingCategories { get; set; }
+
+        public System.Data.Entity.DbSet<MyLittlePetShop.Models.ShoppingItem> ShoppingItems { get; set; }
     }
 }

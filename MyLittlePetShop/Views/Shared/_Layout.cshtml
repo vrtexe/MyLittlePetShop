@@ -8,26 +8,40 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+<body class="p-0">
+    <div class="navbar navbar-dark navbar-expand-sm bg-dark row">
+        <div class="container-fluid">
+            <div class="navbar-toggler">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <div class="collapse navbar-collapse flex-column" id="navbar">
+                <ul class="navbar-nav col-md-12">
+                    <li class="nav-item active col-md-1">   
+                        <a class="navbar-brand ml-3" href="#">
+                            <img src="~/Content/Images/SiteIcons/logo.png" width="100" rel="image">
+                        </a>
+                    </li>
+                    <li class="nav-item col-md-10 mt-3">
+                        @{
+                            Html.RenderAction("Search","Home");
+                        }
+                    </li>
+                    <li class="nav-item col-md-3 mt-3">
+                        @Html.Partial("_LoginPartial")
+                    </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <ul class="navbar-nav col-md-12">
+                    <li class="nav-item col-sm-1">@Html.ActionLink("Home", "Index", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item col-sm-1">@Html.ActionLink("Categories", "Index","Categories", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item col-sm-1">@Html.ActionLink("Products", "Index", "Items", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item col-sm-1">@Html.ActionLink("About", "About", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item col-sm-1">@Html.ActionLink("Contact", "Contact", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item col-sm-1">@Html.ActionLink("Sell", "Create", "Items", null, htmlAttributes: new { @class = "nav-link"})</li>
+                </ul>
             </div>
-        </div>
+        </div>        
     </div>
     <div class="container body-content">
         @RenderBody()
