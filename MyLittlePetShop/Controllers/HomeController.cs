@@ -17,7 +17,6 @@ namespace MyLittlePetShop.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
@@ -28,9 +27,10 @@ namespace MyLittlePetShop.Controllers
             return PartialView(model);
         }
         [HttpPost]
-        public ActionResult Search(String model)
+        public ActionResult Search(SearchModel model)
         {
-            Response.Redirect("/Home/About");
+            ViewBag.search = model.Search;
+            Response.Redirect("/Items/Index");
             return PartialView(model);
 
         }
