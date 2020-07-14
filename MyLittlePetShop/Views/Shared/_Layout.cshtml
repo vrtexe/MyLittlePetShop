@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body class="p-0">
+<body class="p-0" style="background-color:lightgray;">
     <div class="navbar navbar-dark navbar-expand-sm bg-dark row">
         <div class="container-fluid">
             <div class="navbar-toggler">
@@ -34,20 +34,48 @@
                 </ul>
                 <ul class="navbar-nav col-md-12">
                     <li class="nav-item col-sm-1">@Html.ActionLink("Home", "Index", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
-                    <li class="nav-item col-sm-1">@Html.ActionLink("Categories", "Index","Categories", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item col-sm-1">@Html.ActionLink("Categories", "Index", "Categories", null, htmlAttributes: new { @class = "nav-link" })</li>
                     <li class="nav-item col-sm-1">@Html.ActionLink("Products", "Index", "Items", null, htmlAttributes: new { @class = "nav-link" })</li>
                     <li class="nav-item col-sm-1">@Html.ActionLink("About", "About", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
                     <li class="nav-item col-sm-1">@Html.ActionLink("Contact", "Contact", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
-                    <li class="nav-item col-sm-1">@Html.ActionLink("Sell", "Create", "Items", null, htmlAttributes: new { @class = "nav-link"})</li>
+                    <li class="nav-item col-sm-1">@Html.ActionLink("Sell", "Create", "Items", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li class="nav-item col-sm-1">@Html.ActionLink("Cart", "Index", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>        
     </div>
     <div class="container body-content">
+        <br />
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <div style="background-color:gray; padding:20px;">
+                <table cellpadding="5px">
+                    <tr>
+                        <td>
+                            <img src="~/Content/Images/SiteIcons/logo.png" width="70" rel="image">
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><b>Working hours:</b><br /> Monday - Friday (08:00 - 18:00)</p>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <p>
+                &copy; MyLittlePetShop @DateTime.Now.Year
+                <img src="~/Content/Images/SiteIcons/visaIcon.png" width="35" rel="image">
+                <img src="~/Content/Images/SiteIcons/mastercardIcon.png" width="35" rel="image">
+                <img src="~/Content/Images/SiteIcons/americanexpressIcon.png" width="35" rel="image">
+            </p>
         </footer>
     </div>
 
