@@ -7,37 +7,16 @@
 </div>
 
 <div>
-    <h2>New</h2>
     <hr />
-    <table cellpadding="23px">
-        <tr>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-        </tr>
-    </table>
-    <br />
-    <h2>Most popular</h2>
-    <hr />
-    <table cellpadding="23px">
-        <tr>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-        </tr>
-    </table>
-    <br />
-    <h2>Trending</h2>
-    <hr />
-    <table cellpadding="23px">
-        <tr>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-            <th><img src="not_found.jpg" width="200px" height="200px" style="background-color:white;"><br />@Html.Label("Name of product")<br />@Html.Label("Price: ")<br />@Html.ActionLink("Add to cart", "Index")</th>
-        </tr>
-    </table>
-    <br />
+    <div class="row">
+        <div>
+
+        </div>
+    </div>
+    <div class="container-fluid">
+        @Html.Action("ShowItems", new { page = ViewBag.page })
+    </div>
+    <div class="container container-fluid">
+        @Html.Action("ShowByNew", new { page = ViewBag.page1 })
+    </div>
 </div>

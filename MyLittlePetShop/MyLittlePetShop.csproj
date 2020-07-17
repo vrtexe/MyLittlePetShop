@@ -48,6 +48,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -378,10 +384,13 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\Images\SiteIcons\americanexpressIcon.png" />
     <Content Include="Content\Images\SiteIcons\home.jpg" />
+    <Content Include="Content\Images\SiteIcons\LeftArrow.png" />
     <Content Include="Content\Images\SiteIcons\logo.png" />
     <Content Include="Content\Images\SiteIcons\mastercardIcon.png" />
+    <Content Include="Content\Images\SiteIcons\RightArrow.png" />
     <Content Include="Content\Images\SiteIcons\searchIcon.png" />
     <Content Include="Content\Images\SiteIcons\visaIcon.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -627,6 +636,8 @@
     <Content Include="Views\Items\Details.cshtml" />
     <Content Include="Views\Items\Edit.cshtml" />
     <Content Include="Views\Items\Index.cshtml" />
+    <Content Include="Views\Home\ShowItems.cshtml" />
+    <Content Include="Views\Home\ShowByNew.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

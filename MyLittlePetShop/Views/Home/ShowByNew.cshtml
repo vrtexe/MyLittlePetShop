@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MyLittlePetShop.Models.ShoppingItem>
+@{
+    ViewBag.Title = "ShowItems";
+}
+
+<h2>New</h2>
+
+<table class="table bg-dark p-3">
+    <tbody class="container">
+        <tr class="row">
+            <td class="col-md-1 d-flex justify-content-center border-0" rowspan="6">
+                <div class="row pl-3 pt-5 pb-5">
+                    <input type="image" onclick="@("location.href='" + Url.Action("Index", "Home", new { page1 = ViewBag.page1 - 1 >= 1 ? ViewBag.page1 - 1 : ViewBag.page1, page=ViewBag.page }) + "'")" class="w-75 ml-2" src="~/Content/Images/SiteIcons/LeftArrow.png" />
+                </div>
+            </td>
+            @foreach (var item in Model)
+            {
+                <td class="col-md-2 p-3 mr-0 border-0 btn-link" onclick="@("location.href='" + Url.Action("Details", "Items", new { id = item.Id }) + "'")" colspan="3" rowspan="6">
+                    <div class="row">
+                        <div class="col-md-12 p-0">
+                            <input type="image" src="@item.Image" style="height:15%;" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7 p-0 text-center form-control">
+                            @Html.DisplayFor(model => item.Name)
+                        </div>
+                        <div class="col-md-5 p-0 text-center form-control">
+                            @Html.DisplayFor(model => item.Price)
+                        </div>
+                    </div>
+                </td>
+            }
+            @if (Model.Count() < 5)
+            {
+                int c = Model.Count();
+                for (int i = c; i < 5; i++)
+                {
+                    <td class="col-md-2">
+                    </td>
+                }
+            }
+            <td class="col-md-1 d-flex justify-content-center border-0 align-content-end" rowspan="6">
+                <div class="row pr-3 pt-5 pb-5">
+                    <input type="image" class="w-75 ml-2" onclick="@("location.href='" + Url.Action("Index", "Home",new { page1 = (int)(ViewBag.page1)+1, page=ViewBag.page }) + "'")" src="~/Content/Images/SiteIcons/RightArrow.png" />
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

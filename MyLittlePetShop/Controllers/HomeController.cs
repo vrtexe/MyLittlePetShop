@@ -4,13 +4,31 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyLittlePetShop.Models;
+using PagedList;
 
 namespace MyLittlePetShop.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        ApplicationDbContext db;
+        public HomeController()
         {
+            ViewBag.page = 1;
+            db = new ApplicationDbContext();
+        }
+        
+        public ActionResult Index(int? page, int? page1)
+        {
+            if (page == null)
+            {
+                page = 1;
+            }
+            if(page1 == null)
+            {
+                page1 = 1;
+            }
+            ViewBag.page = page;
+            ViewBag.page1 = page1;
             return View();
         }
 
@@ -34,12 +52,31 @@ namespace MyLittlePetShop.Controllers
             return PartialView(model);
 
         }
-
+        public ActionResult ShowItems(int? page)
+        {
+            ViewBag.page = page;
+            List<ShoppingItem> items = db.ShoppingItems.ToList();
+            return PartialView(items.ToPagedList(page.Value,5));
+        }
+        public ActionResult ShowByNew(int? page)
+        {
+            ViewBag.page1 = page;
+            List<ShoppingItem> items = db.ShoppingItems.ToList();
+            return PartialView(items.ToPagedList(page.Value, 5));
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
