@@ -47,10 +47,18 @@ namespace MyLittlePetShop.Controllers
         [HttpPost]
         public ActionResult Search(SearchModel model)
         {
-            ViewBag.search = model.Search;
-            Response.Redirect("/Items/Index");
+            Response.Redirect("/Items/Index/?search="+model.Search);
             return PartialView(model);
 
+        }
+        [HttpGet]
+        public ActionResult GetData(int? page)
+        {
+            return Json(db.ShoppingItems.ToList().ToPagedList(page.Value,5),JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetDataNew(int? page)
+        {
+            return Json(db.ShoppingItems.OrderByDescending(d => d.DateAdded).ToList().ToPagedList(page.Value, 5), JsonRequestBehavior.AllowGet);
         }
         public ActionResult ShowItems(int? page)
         {

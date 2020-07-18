@@ -7,27 +7,37 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (User.IsInRole("Administrator"))
+    {
+        @Html.ActionLink("Add Category", "Create", null, htmlAttributes: new { @class = "btn btn-dark" })
+    }
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th></th>
+        @if (User.IsInRole("Administrator"))
+        {
+            <th>Controls</th>
+        }
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.ActionLink(item.Name,"SearchByCategory","Home")
+            <a >@item.Name</a>
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
+        @if(User.IsInRole("Administrator"))
+        {
+            <td>
+                <button class="js-delete btn btn-danger" thisId="Id">Remove</button>
+            </td>
+        }
     </tr>
 }
-
 </table>
+@section scripts{
+    <script src="~/Scripts/AppScripts/js-async-delete.js"></script>
+    }

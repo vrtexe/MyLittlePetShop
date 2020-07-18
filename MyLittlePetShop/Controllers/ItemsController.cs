@@ -15,11 +15,15 @@ namespace MyLittlePetShop.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Items
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            return View(db.ShoppingItems.ToList());
+            List<ShoppingItem> items = db.ShoppingItems.ToList();
+            if(!string.IsNullOrEmpty(search))
+            {
+                items = items.Where(item => item.Category.Name.Contains(search) || item.Name.Contains(search) || item.Description.Contains(search)).ToList();
+            }
+            return View(items);
         }
-
         // GET: Items/Details/5
         public ActionResult Details(int? id)
         {
@@ -53,7 +57,9 @@ namespace MyLittlePetShop.Controllers
             if (ModelState.IsValid)
             {
                 shoppingItem.Category = db.ShoppingCategories.Find(shoppingItem.CategoryId);
+                shoppingItem.DateAdded = DateTime.Now;
                 db.ShoppingItems.Add(shoppingItem);
+                db.Entry(shoppingItem).State = EntityState.Added;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

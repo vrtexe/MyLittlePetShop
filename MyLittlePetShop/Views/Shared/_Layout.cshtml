@@ -18,18 +18,21 @@
             </div>
             <div class="collapse navbar-collapse flex-column" id="navbar">
                 <ul class="navbar-nav col-md-12">
-                    <li class="nav-item active col-md-1">   
+                    <li class="nav-item active col-md-1">
                         <a class="navbar-brand ml-3" href="#">
                             <img src="~/Content/Images/SiteIcons/logo.png" width="100" rel="image">
                         </a>
                     </li>
                     <li class="nav-item col-md-10 mt-3">
                         @{
-                            Html.RenderAction("Search","Home");
+                            Html.RenderAction("Search", "Home");
                         }
                     </li>
-                    <li class="nav-item col-md-3 mt-3">
+                    <li class="nav-item col-md-1 mt-3">
                         @Html.Partial("_LoginPartial")
+                    </li>
+                    <li class="nav-item col-md-1 mt-3">
+                        @Html.ActionLink("Cart", "Details", "ShoppingCart");
                     </li>
                 </ul>
                 <ul class="navbar-nav col-md-12">
@@ -42,7 +45,7 @@
                     <li class="nav-item col-sm-1">@Html.ActionLink("Cart", "Index", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
                 </ul>
             </div>
-        </div>        
+        </div>
     </div>
     <div class="container body-content">
         <br />
@@ -50,13 +53,12 @@
         <hr />
         <footer>
             <div style="background-color:gray; padding:20px;">
-                <table cellpadding="5px">
+                <table cellpadding="5">
                     <tr>
                         <td>
                             <img src="~/Content/Images/SiteIcons/logo.png" width="70" rel="image">
                         </td>
                         <td>
-
                         </td>
                     </tr>
                     <tr>
@@ -64,12 +66,11 @@
                             <p><b>Working hours:</b><br /> Monday - Friday (08:00 - 18:00)</p>
                         </td>
                         <td>
-
                         </td>
                     </tr>
                 </table>
             </div>
-            
+
             <p>
                 &copy; MyLittlePetShop @DateTime.Now.Year
                 <img src="~/Content/Images/SiteIcons/visaIcon.png" width="35" rel="image">
@@ -84,3 +85,8 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+@section scripts{
+    <script src="~/Scripts/AppScripts/js-ChangePage.js"></script>
+
+}

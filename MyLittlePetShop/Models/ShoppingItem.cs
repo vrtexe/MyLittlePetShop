@@ -17,7 +17,8 @@ namespace MyLittlePetShop.Models
         public string Name { get; set; }
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
-        public ShoppingCategory Category { get; set; }
+        public DateTime DateAdded { get; set; }
+        public virtual ShoppingCategory Category { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]

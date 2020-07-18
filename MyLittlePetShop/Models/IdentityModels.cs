@@ -33,5 +33,7 @@ namespace MyLittlePetShop.Models
         public System.Data.Entity.DbSet<MyLittlePetShop.Models.ShoppingCategory> ShoppingCategories { get; set; }
 
         public System.Data.Entity.DbSet<MyLittlePetShop.Models.ShoppingItem> ShoppingItems { get; set; }
+
+        public System.Data.Entity.DbSet<MyLittlePetShop.Models.ShoppingCartItems> ShoppingCartItems { get; set; }
     }
 }

@@ -57,12 +57,21 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -175,11 +184,14 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesAPIController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,11 +215,24 @@
     <Compile Include="Migrations\202007131500551_mig3.Designer.cs">
       <DependentUpon>202007131500551_mig3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007181512439_mig4.cs" />
+    <Compile Include="Migrations\202007181512439_mig4.Designer.cs">
+      <DependentUpon>202007181512439_mig4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007181531264_mig5.cs" />
+    <Compile Include="Migrations\202007181531264_mig5.Designer.cs">
+      <DependentUpon>202007181531264_mig5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007181703589_mig6.cs" />
+    <Compile Include="Migrations\202007181703589_mig6.Designer.cs">
+      <DependentUpon>202007181703589_mig6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Models\ShoppingCartItems.cs" />
     <Compile Include="Models\ShoppingItem.cs" />
     <Compile Include="Models\ShoppingCategory.cs" />
     <Compile Include="Models\SubmitedProducts.cs" />
@@ -382,18 +407,16 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\Images\SiteIcons\americanexpressIcon.png" />
-    <Content Include="Content\Images\SiteIcons\home.jpg" />
     <Content Include="Content\Images\SiteIcons\LeftArrow.png" />
     <Content Include="Content\Images\SiteIcons\logo.png" />
-    <Content Include="Content\Images\SiteIcons\mastercardIcon.png" />
     <Content Include="Content\Images\SiteIcons\RightArrow.png" />
     <Content Include="Content\Images\SiteIcons\searchIcon.png" />
-    <Content Include="Content\Images\SiteIcons\visaIcon.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\AppScripts\js-async-delete.js" />
+    <Content Include="Scripts\AppScripts\js-ChangePage.js" />
     <Content Include="Scripts\AppScripts\paging.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
@@ -638,6 +661,11 @@
     <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Views\Home\ShowItems.cshtml" />
     <Content Include="Views\Home\ShowByNew.cshtml" />
+    <Content Include="Views\ShoppingCart\Create.cshtml" />
+    <Content Include="Views\ShoppingCart\Delete.cshtml" />
+    <Content Include="Views\ShoppingCart\Details.cshtml" />
+    <Content Include="Views\ShoppingCart\Edit.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -666,6 +694,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007131500551_mig3.resx">
       <DependentUpon>202007131500551_mig3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007181512439_mig4.resx">
+      <DependentUpon>202007181512439_mig4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007181531264_mig5.resx">
+      <DependentUpon>202007181531264_mig5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007181703589_mig6.resx">
+      <DependentUpon>202007181703589_mig6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

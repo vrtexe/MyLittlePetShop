@@ -8,44 +8,45 @@
 <table class="table bg-dark p-3">
     <tbody class="container">
         <tr class="row">
-            <td class="col-md-1 d-flex justify-content-center border-0" rowspan="6">
+            <td class="col-md-1 d-flex justify-content-center border-0" id="event" rowspan="6">
                 <div class="row pl-3 pt-5 pb-5">
-                    <input type="image" onclick="@("location.href='" + Url.Action("Index", "Home", new { page = ViewBag.page - 1 >= 1 ? ViewBag.page - 1 : ViewBag.page, page1=ViewBag.page1 }) + "'")" class="w-75 ml-2" src="~/Content/Images/SiteIcons/LeftArrow.png" />
+                    <input type="image" class="w-75 ml-2 js-load-prev" src="~/Content/Images/SiteIcons/LeftArrow.png" />
                 </div>
             </td>
             @foreach (var item in Model)
             {
-                <td class="col-md-2 p-3 mr-0 border-0 btn-link" onclick="@("location.href='" + Url.Action("Details", "Items", new { id = item.Id }) + "'")" colspan="3" rowspan="6">
+                <td class="col-md-2 p-3 mr-0 border-0 btn-link" thisId="@item.Id" style="height:1px" onclick="@("location.href='" + Url.Action("Details", "Items", new { id = item.Id }) + "'")" colspan="3" rowspan="6">
                     <div class="row">
                         <div class="col-md-12 p-0">
-                            <input type="image" src="@item.Image" style="height:15%;" class="form-control"  />
+                            <input type="image" src="@item.Image" style="height:inherit;" class="form-control" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-7 p-0 text-center form-control">
-                            @Html.DisplayFor(model => item.Name)
+                            @Html.DisplayFor(modelitem => item.Name)
                         </div>
                         <div class="col-md-5 p-0 text-center form-control">
-                            @Html.DisplayFor(model => item.Price)
+                            @Html.DisplayFor(modelitem => item.Price)
                         </div>
                     </div>
                 </td>
             }
-            @if(Model.Count() < 5)
+            @if (Model.Count() < 5)
             {
                 int c = Model.Count();
                 for (int i = c; i < 5; i++)
                 {
                     <td class="col-md-2">
-
                     </td>
                 }
             }
-            <td class="col-md-1 d-flex justify-content-center border-0 align-content-end" rowspan="6">
+            <td class="col-md-1 d-flex justify-content-center border-0 align-content-end " rowspan="6">
                 <div class="row pr-3 pt-5 pb-5">
-                    <input type="image" class="w-75 ml-2" onclick="@("location.href='" + Url.Action("Index", "Home",new { page= (int)(ViewBag.page)+1, page1=ViewBag.page1 }) + "'")" src="~/Content/Images/SiteIcons/RightArrow.png" />
+                    <input type="image" class="w-75 ml-2 js-load-next" src="~/Content/Images/SiteIcons/RightArrow.png" />
                 </div>
             </td>
         </tr>
     </tbody>
 </table>
+@section scripts{
+}
