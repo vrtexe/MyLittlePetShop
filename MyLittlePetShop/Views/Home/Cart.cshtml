@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MyLittlePetShop.Models.ShoppingItem>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal TotalAmount = 0; 
+    decimal Total=0;
+}
+
+<h2>Cart</h2>
+
+<table class="table">
+    <tr>
+        <td>
+        </td>
+        <td>
+            Name
+        </td>
+        <td>
+            Quantity
+        </td>
+        <td>
+            Price
+        </td>
+        <td>
+            Total Item Price
+        </td>
+        <td>
+        </td>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            Total = (item.Quantity * item.Price);
+            TotalAmount += Total;
+            <tr>
+                <td>
+                    <input type="image" src="@item.Image" />
+                </td>
+                <td>
+                    @item.Name
+                </td>
+
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    @item.Price
+                </td>
+
+                <td>
+                    @Total
+                </td>
+                <td>
+                    @Html.ActionLink("Remove", "RemoveFromCart", new { name = item.Name })
+                </td>
+            </tr>
+        }
+    }
+    <tr align="right">
+        <td colspan="5">
+            <h3>Total: @TotalAmount</h3>
+        </td>
+    </tr>
+    <tr align="right">
+        <td colspan="5">
+            @Html.ActionLink("Checkout", "Checkout", new { total = @Total })
+        </td>
+    </tr>
+</table>

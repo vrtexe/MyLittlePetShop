@@ -638,6 +638,8 @@
     <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Views\Home\ShowItems.cshtml" />
     <Content Include="Views\Home\ShowByNew.cshtml" />
+    <Content Include="Views\Home\Cart.cshtml" />
+    <Content Include="Views\Home\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
