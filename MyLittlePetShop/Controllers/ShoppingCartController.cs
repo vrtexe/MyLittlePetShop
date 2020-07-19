@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace MyLittlePetShop.Controllers
 {
+    [Authorize]
     public class ShoppingCartController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -21,6 +22,19 @@ namespace MyLittlePetShop.Controllers
             return View(db.ShoppingCartItems.ToList());
         }
 
+        public ActionResult Order()
+        {
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            ShoppingCartItems items = db.ShoppingCartItems.Find(User.Identity.GetUserId());
+            for (int i = 0; i < items.items.Count; i++)
+            {
+                items.items.Remove(items.items[i]);
+                i--;
+            }
+            db.Entry(items).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Details");
+        }
         // GET: ShoppingCart/Details/5
         public ActionResult Details()
         {
@@ -40,7 +54,7 @@ namespace MyLittlePetShop.Controllers
             if(shoppingCartItems != null)
             {
                 ShoppingItem item = db.ShoppingItems.Find(id);
-                shoppingCartItems.Quantity = item.Quantity >= quantity ? quantity : item.Quantity;
+                shoppingCartItems.Quantity.Add(item.Quantity >= quantity ? quantity : item.Quantity);
                 shoppingCartItems.items.Add(item);
                 db.Entry(shoppingCartItems).State = EntityState.Modified;
                 db.SaveChanges();

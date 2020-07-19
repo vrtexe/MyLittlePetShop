@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Categories</h2>
 
 <p>
     @if (User.IsInRole("Administrator"))
@@ -12,32 +12,53 @@
         @Html.ActionLink("Add Category", "Create", null, htmlAttributes: new { @class = "btn btn-dark" })
     }
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        @if (User.IsInRole("Administrator"))
-        {
-            <th>Controls</th>
-        }
-    </tr>
+<table class="table" id="Categories">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            @if (User.IsInRole("Administrator"))
+            {
+                <th>Controls</th>
+            }
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.Name,"SearchByCategory","Home")
-            <a >@item.Name</a>
-        </td>
-        @if(User.IsInRole("Administrator"))
+    <tbody>
+
+        @foreach (var item in Model)
         {
-            <td>
-                <button class="js-delete btn btn-danger" thisId="Id">Remove</button>
-            </td>
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "SearchByCategory", "Home", new { search = "", id = item.Id }, htmlAttributes: new { @class = "text" })
+                </td>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <td>
+                        <button class="js-delete btn btn-danger" thisId="@item.Id">Remove</button>
+                    </td>
+                }
+            </tr>
         }
-    </tr>
-}
+    </tbody>
+
 </table>
 @section scripts{
-    <script src="~/Scripts/AppScripts/js-async-delete.js"></script>
+    <script>
+        $(".js-delete").click(function () {
+        let btn = $(this);
+        bootbox.confirm("Are you sure you would liek to delete category ?", function (confirm) {
+        if (confirm) {
+            $.ajax({
+                method: "DELETE",
+                url: "api/CategoriesAPI/" + btn.attr("thisId"),
+                success: function () {
+                    $('#Categories').DataTable().row(btn.parent().parent()).remove().draw();
+                    }
+                })
+            }
+        })
+    })
+    </script>
     }

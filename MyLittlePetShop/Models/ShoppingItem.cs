@@ -25,6 +25,5 @@ namespace MyLittlePetShop.Models
         public decimal Price { get; set; }
         [Required]
         public int Quantity { get; set; }
-
     }
 }

@@ -6,7 +6,7 @@
                 method: "DELETE",
                 url: "api/CategoriesAPI/" + btn.attr("thisId"),
                 success: function () {
-                    $(".table").row(btn.parent().parent()).remove().draw()
+                    $(".table").DataTable().row(btn.parent().parent()).remove().draw()
                 }
             })
         }

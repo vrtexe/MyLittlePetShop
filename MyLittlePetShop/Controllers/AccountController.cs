@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MyLittlePetShop.Models;
@@ -17,9 +18,10 @@ namespace MyLittlePetShop.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext _context;
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -38,6 +40,31 @@ namespace MyLittlePetShop.Controllers
             { 
                 _signInManager = value; 
             }
+        }
+        public ActionResult AsignRole()
+        {
+            ViewBag.roles = _context.Roles.ToList();
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> AsignRole(UserToRole model)
+        {
+            ApplicationUser User = _context.Users.Where(user => user.Email.Equals(model.UserEmail)).First();
+            if(User != null)
+            {
+                IdentityRole role = _context.Roles.Find(model.RoleId);
+                await UserManager.AddToRoleAsync(User.Id, role.Name);
+                if(role.Name == "Seller" || role.Name == "Administrator")
+                {
+                    SubmitedProducts submitedProducts = new SubmitedProducts();
+                    submitedProducts.UserId = User.Id;
+                    submitedProducts.Products = new System.Collections.Generic.List<ShoppingItem>();
+                    _context.SubmitedProducts.Add(submitedProducts);
+                    _context.Entry(submitedProducts).State = System.Data.Entity.EntityState.Added;
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         public ApplicationUserManager UserManager
@@ -154,9 +181,9 @@ namespace MyLittlePetShop.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
-                {
+                {                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    _context.ShoppingCartItems.Add(new ShoppingCartItems(User.Identity.GetUserId()));
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -417,6 +444,11 @@ namespace MyLittlePetShop.Controllers
                 {
                     _signInManager.Dispose();
                     _signInManager = null;
+                }
+                if(_context != null)
+                {
+                    _context.Dispose();
+                    _context = null;
                 }
             }
 

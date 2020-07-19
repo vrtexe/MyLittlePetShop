@@ -14,21 +14,12 @@ namespace MyLittlePetShop.Controllers
         public HomeController()
         {
             ViewBag.page = 1;
+            ViewBag.page1 = 1;
             db = new ApplicationDbContext();
         }
         
-        public ActionResult Index(int? page, int? page1)
+        public ActionResult Index()
         {
-            if (page == null)
-            {
-                page = 1;
-            }
-            if(page1 == null)
-            {
-                page1 = 1;
-            }
-            ViewBag.page = page;
-            ViewBag.page1 = page1;
             return View();
         }
 
@@ -38,6 +29,10 @@ namespace MyLittlePetShop.Controllers
             return View();
         }
 
+        public ActionResult SearchByCategory(string search,int? id)
+        {
+            return RedirectToAction("Index", "Items",new { search, id });
+        }
         public ActionResult Search()
         {
             SearchModel model = new SearchModel();
@@ -49,7 +44,6 @@ namespace MyLittlePetShop.Controllers
         {
             Response.Redirect("/Items/Index/?search="+model.Search);
             return PartialView(model);
-
         }
         [HttpGet]
         public ActionResult GetData(int? page)

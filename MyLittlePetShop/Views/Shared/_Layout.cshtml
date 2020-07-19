@@ -23,16 +23,16 @@
                             <img src="~/Content/Images/SiteIcons/logo.png" width="100" rel="image">
                         </a>
                     </li>
-                    <li class="nav-item col-md-10 mt-3">
+                    <li class="nav-item col-md-8 mt-3">
                         @{
                             Html.RenderAction("Search", "Home");
                         }
                     </li>
-                    <li class="nav-item col-md-1 mt-3">
+                    <li class="nav-item col-md-2 mt-3">
                         @Html.Partial("_LoginPartial")
                     </li>
                     <li class="nav-item col-md-1 mt-3">
-                        @Html.ActionLink("Cart", "Details", "ShoppingCart");
+                        @Html.ActionLink("Cart", "Details", "ShoppingCart", null, htmlAttributes: new { @class = "btn btn-dark" })
                     </li>
                 </ul>
                 <ul class="navbar-nav col-md-12">
@@ -41,8 +41,15 @@
                     <li class="nav-item col-sm-1">@Html.ActionLink("Products", "Index", "Items", null, htmlAttributes: new { @class = "nav-link" })</li>
                     <li class="nav-item col-sm-1">@Html.ActionLink("About", "About", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
                     <li class="nav-item col-sm-1">@Html.ActionLink("Contact", "Contact", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
-                    <li class="nav-item col-sm-1">@Html.ActionLink("Sell", "Create", "Items", null, htmlAttributes: new { @class = "nav-link" })</li>
-                    <li class="nav-item col-sm-1">@Html.ActionLink("Cart", "Index", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Seller"))
+                    {
+                        <li class="nav-item col-sm-1">@Html.ActionLink("Sell", "Create", "Items", null, htmlAttributes: new { @class = "nav-link" })</li>
+                        <li class="nav-item col-sm-1">@Html.ActionLink("Selling", "Index", "SubmitedProducts", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    }
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li class="nav-item col-sm-1">@Html.ActionLink("Asign Role", "AsignRole", "Account", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    }
                 </ul>
             </div>
         </div>

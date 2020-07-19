@@ -189,9 +189,13 @@
     <Compile Include="Controllers\CategoriesAPIController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\itemsApiController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\ShoppingCartItemsController.cs" />
+    <Compile Include="Controllers\SubmitedProducts1Controller.cs" />
+    <Compile Include="Controllers\SubmitedProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,8 +231,21 @@
     <Compile Include="Migrations\202007181703589_mig6.Designer.cs">
       <DependentUpon>202007181703589_mig6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007182245453_mig7.cs" />
+    <Compile Include="Migrations\202007182245453_mig7.Designer.cs">
+      <DependentUpon>202007182245453_mig7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007182329154_mig8.cs" />
+    <Compile Include="Migrations\202007182329154_mig8.Designer.cs">
+      <DependentUpon>202007182329154_mig8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007190053177_mig9.cs" />
+    <Compile Include="Migrations\202007190053177_mig9.Designer.cs">
+      <DependentUpon>202007190053177_mig9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BuyerInfo.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SearchModel.cs" />
@@ -236,6 +253,7 @@
     <Compile Include="Models\ShoppingItem.cs" />
     <Compile Include="Models\ShoppingCategory.cs" />
     <Compile Include="Models\SubmitedProducts.cs" />
+    <Compile Include="Models\UserToRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -666,6 +684,12 @@
     <Content Include="Views\ShoppingCart\Details.cshtml" />
     <Content Include="Views\ShoppingCart\Edit.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\SubmitedProducts\Create.cshtml" />
+    <Content Include="Views\SubmitedProducts\Delete.cshtml" />
+    <Content Include="Views\SubmitedProducts\Details.cshtml" />
+    <Content Include="Views\SubmitedProducts\Edit.cshtml" />
+    <Content Include="Views\SubmitedProducts\Index.cshtml" />
+    <Content Include="Views\Account\AsignRole.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -703,6 +727,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007181703589_mig6.resx">
       <DependentUpon>202007181703589_mig6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007182245453_mig7.resx">
+      <DependentUpon>202007182245453_mig7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007182329154_mig8.resx">
+      <DependentUpon>202007182329154_mig8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007190053177_mig9.resx">
+      <DependentUpon>202007190053177_mig9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

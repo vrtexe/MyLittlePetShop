@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using MyLittlePetShop.Models;
 
 namespace MyLittlePetShop.Controllers
@@ -15,12 +16,16 @@ namespace MyLittlePetShop.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Items
-        public ActionResult Index(string search)
+        public ActionResult Index(string search,int? id)
         {
             List<ShoppingItem> items = db.ShoppingItems.ToList();
             if(!string.IsNullOrEmpty(search))
             {
                 items = items.Where(item => item.Category.Name.Contains(search) || item.Name.Contains(search) || item.Description.Contains(search)).ToList();
+            }
+            if(id != null)
+            {
+                items = items.Where(item => item.CategoryId == id.Value).ToList();
             }
             return View(items);
         }
@@ -41,6 +46,7 @@ namespace MyLittlePetShop.Controllers
         }
 
         // GET: Items/Create
+        [Authorize(Roles = "Administrator,Seller")]
         public ActionResult Create()
         {
             ViewBag.Categories = db.ShoppingCategories.ToList();
@@ -52,6 +58,7 @@ namespace MyLittlePetShop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Seller")]
         public ActionResult Create([Bind(Include = "Id,Image,Name,CategoryId,Description,Price,Quantity")] ShoppingItem shoppingItem)
         {
             if (ModelState.IsValid)
@@ -59,6 +66,9 @@ namespace MyLittlePetShop.Controllers
                 shoppingItem.Category = db.ShoppingCategories.Find(shoppingItem.CategoryId);
                 shoppingItem.DateAdded = DateTime.Now;
                 db.ShoppingItems.Add(shoppingItem);
+                SubmitedProducts submitedProducts = db.SubmitedProducts.Find(User.Identity.GetUserId());
+                submitedProducts.Products.Add(shoppingItem);
+                db.Entry(submitedProducts).State = EntityState.Modified;
                 db.Entry(shoppingItem).State = EntityState.Added;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -68,6 +78,7 @@ namespace MyLittlePetShop.Controllers
         }
 
         // GET: Items/Edit/5
+        [Authorize(Roles = "Administrator,Seller")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,6 +110,7 @@ namespace MyLittlePetShop.Controllers
         }
 
         // GET: Items/Delete/5
+        [Authorize(Roles = "Administrator,Seller")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,6 +126,7 @@ namespace MyLittlePetShop.Controllers
         }
 
         // POST: Items/Delete/5
+        [Authorize(Roles = "Administrator,Seller")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -87,6 +87,7 @@ namespace MyLittlePetShop.Controllers
 
         // DELETE: api/CategoriesAPI/5
         [ResponseType(typeof(ShoppingCategory))]
+        [Authorize(Roles = "Administrator")]
         public IHttpActionResult DeleteShoppingCategory(int id)
         {
             ShoppingCategory shoppingCategory = db.ShoppingCategories.Find(id);

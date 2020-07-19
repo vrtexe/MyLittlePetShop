@@ -11,15 +11,17 @@ namespace MyLittlePetShop.Models
         [Key]
         [StringLength(128)]
         public string UserID { get; set; }
-        public int Quantity { get; set; }
+        public List<int> Quantity { get; set; }
         public virtual List<ShoppingItem> items { get; set; }
         public ShoppingCartItems(string userID)
         {
             items = new List<ShoppingItem>();
+            Quantity = new List<int>();
             UserID = userID;
         }
         public ShoppingCartItems()
         {
+            Quantity = new List<int>();
             items = new List<ShoppingItem>();
         }
     }
