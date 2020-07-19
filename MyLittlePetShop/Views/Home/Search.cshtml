@@ -7,7 +7,9 @@
         <div class="input-group mb-4 border rounded-pill p-1">
             @Html.TextBoxFor(model => model.Search, htmlAttributes: new { @type = "search", @placeholder = "What're you searching for?", @class = "bg-dark form-control bg-none border-0 col-md-12" })
             <div class="input-group-append border-0">
-                <input class="btn rounded-pill btn-secondary btn-sm my-0" type="submit" value="Search" width="25" src="~/Content/Images/SiteIcons/searchIcon.png" />
+                <a href="javascript:$('form').submit();">
+                    <i class="fa fa-search btn rounded-pill h-100 fa-2x btn-secondary btn-sm my-0"></i>
+                </a>
             </div>
         </div>
 }
