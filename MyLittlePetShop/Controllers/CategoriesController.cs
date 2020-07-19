@@ -48,7 +48,7 @@ namespace MyLittlePetShop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult Create([Bind(Include = "Id,Name")] ShoppingCategory shoppingCategory)
+        public ActionResult Create([Bind(Include = "Id,Name,Image")] ShoppingCategory shoppingCategory)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace MyLittlePetShop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public ActionResult Edit([Bind(Include = "Id,Name")] ShoppingCategory shoppingCategory)
+        public ActionResult Edit([Bind(Include = "Id,Name,Image")] ShoppingCategory shoppingCategory)
         {
             if (ModelState.IsValid)
             {

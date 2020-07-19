@@ -243,6 +243,10 @@
     <Compile Include="Migrations\202007190053177_mig9.Designer.cs">
       <DependentUpon>202007190053177_mig9.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007191352502_mig10.cs" />
+    <Compile Include="Migrations\202007191352502_mig10.Designer.cs">
+      <DependentUpon>202007191352502_mig10.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BuyerInfo.cs" />
@@ -425,16 +429,23 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\Bird.jpg" />
+    <Content Include="Content\Images\Cat.jpg" />
+    <Content Include="Content\Images\Dog.jpg" />
     <Content Include="Content\Images\SiteIcons\LeftArrow.png" />
     <Content Include="Content\Images\SiteIcons\logo.png" />
     <Content Include="Content\Images\SiteIcons\RightArrow.png" />
     <Content Include="Content\Images\SiteIcons\searchIcon.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\AppScripts\js-async-delete.js" />
     <Content Include="Scripts\AppScripts\js-ChangePage.js" />
+    <Content Include="Scripts\AppScripts\js-select-nav.js" />
     <Content Include="Scripts\AppScripts\paging.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
@@ -540,6 +551,11 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -690,6 +706,7 @@
     <Content Include="Views\SubmitedProducts\Edit.cshtml" />
     <Content Include="Views\SubmitedProducts\Index.cshtml" />
     <Content Include="Views\Account\AsignRole.cshtml" />
+    <Content Include="Views\Home\ShowCategories.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -736,6 +753,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007190053177_mig9.resx">
       <DependentUpon>202007190053177_mig9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007191352502_mig10.resx">
+      <DependentUpon>202007191352502_mig10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

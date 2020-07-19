@@ -12,15 +12,15 @@
         @Html.ActionLink("Add Category", "Create", null, htmlAttributes: new { @class = "btn btn-dark" })
     }
 </p>
-<table class="table" id="Categories">
+<table class="table container-fluid" id="Categories">
     <thead>
-        <tr>
-            <th>
+        <tr class="row">
+            <th class="col-8 text-center">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             @if (User.IsInRole("Administrator"))
             {
-                <th>Controls</th>
+                <th class="col-4 text-center">Controls</th>
             }
         </tr>
     </thead>
@@ -29,13 +29,14 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.ActionLink(item.Name, "SearchByCategory", "Home", new { search = "", id = item.Id }, htmlAttributes: new { @class = "text" })
+            <tr class="row">
+                <td class=" col-8 align-middle d-flex justify-content-center">
+                    @Html.ActionLink(item.Name, "SearchByCategory", "Home", new { search = "", id = item.Id }, htmlAttributes: new { @class = "text-center btn btn-light h-100 w-100 align-middle" })
                 </td>
                 @if (User.IsInRole("Administrator"))
                 {
-                    <td>
+                    <td class=" col-4 align-middle d-flex justify-content-center">
+                        @Html.ActionLink("Edit","Edit","Categories", new{ id = item.Id }, htmlAttributes: new { @class="btn btn-dark"});
                         <button class="js-delete btn btn-danger" thisId="@item.Id">Remove</button>
                     </td>
                 }

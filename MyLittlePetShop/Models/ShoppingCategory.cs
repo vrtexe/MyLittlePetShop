@@ -13,6 +13,7 @@ namespace MyLittlePetShop.Models
         [Required]
         [Display(Name = "Category")]
         public string Name { get; set; }
+        public string Image { get; set; }
         //List<ShoppingItem> items { get; set; }
     }
 }

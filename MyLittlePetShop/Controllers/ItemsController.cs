@@ -81,6 +81,7 @@ namespace MyLittlePetShop.Controllers
         [Authorize(Roles = "Administrator,Seller")]
         public ActionResult Edit(int? id)
         {
+            ViewBag.Categories = db.ShoppingCategories.ToList();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

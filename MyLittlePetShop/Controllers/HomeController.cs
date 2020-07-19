@@ -15,6 +15,7 @@ namespace MyLittlePetShop.Controllers
         {
             ViewBag.page = 1;
             ViewBag.page1 = 1;
+            ViewBag.page2 = 1;
             db = new ApplicationDbContext();
         }
         
@@ -54,6 +55,10 @@ namespace MyLittlePetShop.Controllers
         {
             return Json(db.ShoppingItems.OrderByDescending(d => d.DateAdded).ToList().ToPagedList(page.Value, 5), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetDataCategories(int? page)
+        {
+            return Json(db.ShoppingCategories.ToList().ToPagedList(page.Value, 5), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ShowItems(int? page)
         {
             ViewBag.page = page;
@@ -65,6 +70,12 @@ namespace MyLittlePetShop.Controllers
             ViewBag.page1 = page;
             List<ShoppingItem> items = db.ShoppingItems.ToList();
             return PartialView(items.ToPagedList(page.Value, 5));
+        }
+        public ActionResult ShowCategories(int? page)
+        {
+            ViewBag.page2 = page;
+            List<ShoppingCategory> categories = db.ShoppingCategories.ToList();
+            return PartialView(categories.ToPagedList(page.Value,5));
         }
         public ActionResult Contact()
         {
