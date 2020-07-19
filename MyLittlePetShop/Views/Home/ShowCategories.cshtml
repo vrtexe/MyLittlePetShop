@@ -10,8 +10,10 @@
     <tbody class="container">
         <tr class="row">
             <td class="col-md-1 d-flex justify-content-center border-0" id="event" rowspan="6">
-                <div class="row pl-3 pt-5 pb-5">
-                    <input type="image" class="w-75 ml-2 js-load-prev-category" src="~/Content/Images/SiteIcons/LeftArrow.png" />
+                <div class="row">
+                    <a class="btn btn-link h-100 ml-2 align-middle js-load-prev-category">
+                        <i class="fa pt-5 pb-5 pl-2 h-100 mt-4 fa-2x fa-arrow-left " style="color:white"></i>
+                    </a>
                 </div>
             </td>
             @foreach (var item in Model)
@@ -34,13 +36,15 @@
                 int c = Model.Count();
                 for (int i = c; i < 5; i++)
                 {
-                    <td class="col-md-2">
+                    <td class="col-md-2" style="height:210px">
                     </td>
                 }
             }
             <td class="col-md-1 d-flex justify-content-center border-0 align-content-end " rowspan="6">
-                <div class="row pr-3 pt-5 pb-5">
-                    <input type="image" class="w-75 ml-2 js-load-next-category" src="~/Content/Images/SiteIcons/RightArrow.png" />
+                <div class="row">
+                    <a class="btn btn-link h-100 mr-2 align-middle js-load-next-category">
+                        <i class="fa pt-5 pb-5 pr-2 h-100 mt-4 fa-2x fa-arrow-right " style="color:white"></i>
+                    </a>
                 </div>
             </td>
         </tr>

@@ -32,7 +32,7 @@ $('.js-load-next').click(function () {
                 currRow = currRow.next()
             }
             for (var i = data.length; i < 5; i++) {
-                currRow.after('<td class="col-md-2"></td>')
+                currRow.after('<td class="col-md-2" style="height:210px"></td>')
                 currRow = currRow.next()
             }
         }
@@ -73,7 +73,7 @@ $('.js-load-prev').click(function () {
                 currRow = currRow.next()
             }
             for (var i = data.length; i < 5; i++) {
-                currRow.after('<td class="col-md-2"></td>')
+                currRow.after('<td class="col-md-2" style="height:210px"></td>')
                 currRow = currRow.next()
             }
         }
@@ -114,7 +114,7 @@ $('.js-load-next-new').click(function () {
                 currRow = currRow.next()
             }
             for (var i = data.length; i < 5; i++) {
-                currRow.after('<td class="col-md-2"></td>')
+                currRow.after('<td class="col-md-2" style="height:210px"></td>')
                 currRow = currRow.next()
             }
         }
@@ -155,7 +155,7 @@ $('.js-load-prev-new').click(function () {
                 currRow = currRow.next()
             }
             for (var i = data.length; i < 5; i++) {
-                currRow.after('<td class="col-md-2"></td>')
+                currRow.after('<td class="col-md-2" style="height:210px"></td>')
                 currRow = currRow.next()
             }
         }
@@ -193,7 +193,7 @@ $('.js-load-next-category').click(function () {
                 currRow = currRow.next()
             }
             for (var i = data.length; i < 5; i++) {
-                currRow.after('<td class="col-md-2"></td>')
+                currRow.after('<td class="col-md-2" style="height:210px"></td>')
                 currRow = currRow.next()
             }
         }
@@ -231,7 +231,7 @@ $('.js-load-prev-category').click(function () {
                 currRow = currRow.next()
             }
             for (var i = data.length; i < 5; i++) {
-                currRow.after('<td class="col-md-2"></td>')
+                currRow.after('<td class="col-md-2" style="height:210px"></td>')
                 currRow = currRow.next()
             }
         }
