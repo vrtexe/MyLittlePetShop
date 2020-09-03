@@ -19,6 +19,15 @@ namespace MyLittlePetShop.Controllers
         // GET: SubmitedProducts
         public ActionResult Index()
         {
+            if(db.SubmitedProducts.Find(User.Identity.GetUserId()) == null)
+            {
+                SubmitedProducts submitedProducts = new SubmitedProducts();
+                submitedProducts.UserId = User.Identity.GetUserId();
+                submitedProducts.Products = new System.Collections.Generic.List<ShoppingItem>();
+                db.SubmitedProducts.Add(submitedProducts);
+                db.Entry(submitedProducts).State = System.Data.Entity.EntityState.Added;
+                db.SaveChanges();
+            }
             return View(db.SubmitedProducts.Find(User.Identity.GetUserId()).Products);
         }
 

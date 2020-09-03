@@ -103,6 +103,7 @@ namespace MyLittlePetShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                shoppingItem.DateAdded = DateTime.Now;
                 db.Entry(shoppingItem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

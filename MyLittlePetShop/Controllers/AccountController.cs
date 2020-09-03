@@ -52,7 +52,7 @@ namespace MyLittlePetShop.Controllers
             ApplicationUser User = _context.Users.Where(user => user.Email.Equals(model.UserEmail)).First();
             if(User != null)
             {
-                IdentityRole role = _context.Roles.Find(model.RoleId);
+                IdentityRole role = _context.Roles.Find(model.RoleId.ToString());
                 await UserManager.AddToRoleAsync(User.Id, role.Name);
                 if(role.Name == "Seller" || role.Name == "Administrator")
                 {
@@ -183,12 +183,19 @@ namespace MyLittlePetShop.Controllers
                 if (result.Succeeded)
                 {                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    _context.ShoppingCartItems.Add(new ShoppingCartItems(User.Identity.GetUserId()));
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    IdentityRole role = _context.Roles.Find("2");
+                    await UserManager.AddToRoleAsync(user.Id, role.Name);
+
+                    ShoppingCartItems submitedList = new ShoppingCartItems(user.Id);
+                    _context.ShoppingCartItems.Add(submitedList);
+                    _context.Entry(submitedList).State = System.Data.Entity.EntityState.Added;
+                    _context.SaveChanges();
 
                     return RedirectToAction("Index", "Home");
                 }

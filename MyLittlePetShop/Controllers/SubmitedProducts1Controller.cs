@@ -111,18 +111,13 @@ namespace MyLittlePetShop.Controllers
             {
                 return NotFound();
             }
-            ShoppingItem item = db.ShoppingItems.Find(id);
-            submitedProducts.Products.Remove(item);
-            foreach (var i in db.ShoppingCartItems.ToList())
+            ShoppingCartItems shoppingCartItems = db.ShoppingCartItems.Find(User.Identity.GetUserId());
+            if (shoppingCartItems == null)
             {
-                if(i.items.Contains(item))
-                {
-                    i.items.Remove(item);
-                    db.Entry(i).State = EntityState.Modified;
-                }
+                return NotFound();
             }
-            db.Entry(submitedProducts).State = EntityState.Modified;
-            db.ShoppingItems.Remove(item);
+            shoppingCartItems.items.Remove(db.ShoppingItems.Find(id));
+            db.Entry(shoppingCartItems).State = EntityState.Modified;
             db.SaveChanges();
             return Ok(submitedProducts);
         }

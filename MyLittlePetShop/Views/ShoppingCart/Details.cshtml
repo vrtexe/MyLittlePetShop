@@ -2,26 +2,27 @@
 
 @{
     ViewBag.Title = "Details";
+    decimal sum = 0;
 }
 
 <h2>Shopping Cart</h2>
 
-<table class="table" id="productTable">
-    <thead>
-        <tr>
-            <th>
+<table class="table table-striped d-md-table table-responsive table-borderless table-hover" style="border-collapse:collapse !important" id="productTable">
+    <thead class="thead-dark">
+        <tr class="d-md-table-row">
+            <th scope="col" class="col-auto d-md-table-cell text-center">
                 @Html.DisplayNameFor(model => model.ToArray()[0].Image)
             </th>
-            <th>
+            <th scope="col" class="col-auto d-md-table-cell text-center">
                 @Html.DisplayNameFor(model => model.ToArray()[0].Name)
             </th>
-            <th>
+            <th scope="col" class="col-auto d-md-table-cell text-center">
                 @Html.DisplayNameFor(model => model.ToArray()[0].Price)
             </th>
-            <th>
+            <th scope="col" class="col-auto d-md-table-cell text-center">
                 @Html.DisplayNameFor(model => model.ToArray()[0].Quantity)
             </th>
-            <th>
+            <th scope="col" class="col-auto d-md-table-cell text-center">
                 Controls
             </th>
         </tr>
@@ -29,39 +30,52 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            <tr class="d-md-table-row">
+                <td scope="row" class="col-auto d-md-table-cell">
                     <input type="image" src="@item.Image" onclick="@("location.href='" + Url.Action("Details", "Items", new { id = item.Id }) + "'")" />
                 </td>
-                <td>
+                <td class="col-auto d-md-table-cell align-middle text-center">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
+                <td class="col-auto d-md-table-cell align-middle text-center">
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
-                <td>
+                <td class="col-auto d-md-table-cell align-middle text-center">
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, htmlAttributes: new { @class="btn btn-dark"}) |
-                    @Html.ActionLink("Remove", "Delete", new { id = item.Id }, htmlAttributes: new { @class="btn btn-dark"})
+                <td class="col-auto d-md-table-cell align-middle text-center">
+                    @Html.ActionLink("Edit", "Edit", "Items", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-dark" })
+                    <button class="btn btn-danger js-delete" thisId="@item.Id" >Remove</button>
+                    @*@Html.ActionLink("Remove", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger js-delete" })*@
                 </td>
             </tr>
-        }
+            }
     </tbody>
+    <tfoot class="thead-dark">
+        <tr class="d-md-table-row">
+            <td colspan="3" scope="row" class="d-md-table-cell text-center" style="font-size:large">Total:</td>
+            <td class="d-md-table-cell text-center" style="font-size:large">
+                @Model.Sum(item => item.Price * item.Quantity)
+            </td>
+            <td class="d-md-table-cell text-center">
+                @Html.ActionLink("Place order", "Order", null, htmlAttributes: new { @class = "btn btn-dark col-md-8", style = "font-size:large" })
+            </td>
+        </tr>
+    </tfoot>
 </table>
-@Html.ActionLink("Order", "Order", null, htmlAttributes: new { @class = "btn btn-dark" })
+
 @section scripts{
     <script>
+        var table = $("#productTable").DataTable();
         $(".js-delete").click(function () {
         let btn = $(this);
         bootbox.confirm("Are you sure you would liek to delete Item ?", function (confirm) {
         if (confirm) {
             $.ajax({
                 method: "DELETE",
-                url: "api/SubmitedProducts1/" + btn.attr("thisId"),
+                url: "/api/SubmitedProducts1/" + btn.attr("thisId"),
                 success: function () {
-                    $("#productTable").DataTable().row(btn.parent().parent()).remove().draw()
+                    table.row(btn.parent().parent()).remove().draw()
                 }
             })
         }
